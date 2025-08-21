@@ -124,8 +124,8 @@ async function performAction(actionType, playerId, reason, duration, identifiers
             try {
               const json = JSON.parse(body);
               console.log(`[^2\x1b[1mINFO\x1b[0m^7] \x1b[41m\x1b[30m|txApi|\x1b[0m\x1b[1m ^7${actionType.charAt(0).toUpperCase() + actionType.slice(1)}ed player ID: ${playerId || banId} for ${reason}\x1b[0m^0`);
-              if (actionType === 'ban' && json.banId) {
-                resolve({ banId: json.banId });
+              if (actionType === 'ban' && json.ids && json.ids.length > 0) {
+                resolve({ banId: json.ids[0] }); // Use the first ban ID
               } else {
                 resolve({ success: true });
               }
